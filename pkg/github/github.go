@@ -180,7 +180,7 @@ func (r *Release) filterAssets() (Asset, error) {
 	log.Printf("[DEBUG] asset: %s: using default assets filter", r.Name)
 	assets := *r.Assets.
 		filter(func(asset Asset) bool {
-			expr := `.*\.sbom`
+			expr := `.*\.(asc|sbom)`
 			// filter out
 			return !regexp.MustCompile(expr).MatchString(asset.Name)
 		}).
@@ -203,9 +203,9 @@ func (r *Release) filterAssets() (Asset, error) {
 			expr := ""
 			switch runtime.GOARCH {
 			case "amd64":
-				expr += ".*(amd64|64).*"
+				expr += ".*(amd64).*"
 			case "arm64":
-				expr += ".*(arm64|arm|64).*"
+				expr += ".*(arm64|silicon).*"
 			case "386":
 				expr += ".*(386|86).*"
 			}
