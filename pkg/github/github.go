@@ -204,6 +204,8 @@ func (r *Release) filterAssets() (Asset, error) {
 			switch runtime.GOARCH {
 			case "amd64":
 				expr += ".*(amd64|64).*"
+			case "arm64":
+				expr += ".*(arm64|arm|64).*"
 			case "386":
 				expr += ".*(386|86).*"
 			}
